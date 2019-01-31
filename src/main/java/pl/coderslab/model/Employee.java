@@ -12,6 +12,9 @@ public class Employee {
     private String note;
     private BigDecimal workingHourCost;
 
+    public Employee() {
+    }
+
     public Employee(String name, String surname, String address, int phone, String note, BigDecimal workingHourCost) {
         this.name = name;
         this.surname = surname;

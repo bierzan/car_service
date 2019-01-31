@@ -9,6 +9,9 @@ public class Client {
     private String surname;
     private LocalDate birthday;
 
+    public Client() {
+    }
+
     public Client(String name, String surname, LocalDate birthday) {
         this.name = name;
         this.surname = surname;
