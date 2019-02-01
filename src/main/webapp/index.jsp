@@ -12,7 +12,7 @@
     <%@include file="header.jspf" %>
 </div>
 <div class="container-fluid">
-    <table class="table">
+    <table class="table table-sm table-condensed" style="font-size: 14px">
         <tr>
             <th>ID</th>
             <th>DATA PRZYJĘCIA</th>

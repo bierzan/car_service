@@ -4,12 +4,8 @@ import pl.coderslab.model.Order;
 import pl.coderslab.model.Status;
 import pl.coderslab.utils.DBUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,14 +29,17 @@ public class OrderDao {
             prepStm.setString(1, status.getDisplayStatus());
             prepStm.executeQuery();
             ResultSet rs = prepStm.getResultSet();
-            Order order = new Order();
             while (rs.next()) {
+                Order order = new Order();
                 order.setId(rs.getInt("id"));
-                order.setOrderDate(LocalDateTime.ofInstant(rs.getDate("order_date")
-                        .toInstant(), ZoneId.systemDefault()));
+                Timestamp timestamp = rs.getTimestamp("order_date");
+                LocalDateTime ldt = timestamp.toLocalDateTime();
+
+                order.setOrderDate(ldt);
                 order.setPlannedRepairStart(rs.getDate("planned_repair_start").toLocalDate());
-                order.setRepairStart(LocalDateTime.ofInstant(rs.getDate("repair_start")
-                        .toInstant(), ZoneId.systemDefault()));
+
+
+                order.setRepairStart(rs.getTimestamp("repair_start").toLocalDateTime());
                 order.setEmployee(EmployeeDao.getInstance().loadById(rs.getInt("worker_id")));
                 order.setProblemDescription(rs.getString("problem_desc"));
                 order.setRepairDescription(rs.getString("repair_desc"));
@@ -49,7 +48,10 @@ public class OrderDao {
                 order.setRepairCost(rs.getBigDecimal("repair_cost"));
                 order.setPartsCost(rs.getBigDecimal("parts_cost"));
                 order.setWorkingHours(rs.getInt("working_hours"));
-                order.setRepairEnd(rs.getDate("repair_end").toLocalDate());
+                if (rs.getDate("repair_end") != null) {
+
+                    order.setRepairEnd(rs.getDate("repair_end").toLocalDate());
+                }
 
                 orders.add(order);
             }

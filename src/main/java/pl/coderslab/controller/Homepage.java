@@ -21,11 +21,9 @@ public class Homepage extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Status status = Status.inRepair;
-        System.out.println(status.getDisplayStatus());
-        System.out.println(status);
-//        List<Order> orders = OrderDao.getInstance().loadAllByStatus(status);
-//        request.setAttribute("orders", orders);
-//        getServletContext().getRequestDispatcher("/index.jsp").forward(request,response);
+        List<Order> orders = OrderDao.getInstance().loadAllByStatus(status);
+        request.setAttribute("orders", orders);
+        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 
 
     }

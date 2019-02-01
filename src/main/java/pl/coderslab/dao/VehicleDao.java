@@ -37,6 +37,7 @@ public class VehicleDao {
                 vehicle.setProductionYear(rs.getInt("production_year"));
                 vehicle.setRegNumber(rs.getString("reg_number"));
                 vehicle.setNextService(rs.getDate("next_service").toLocalDate());
+                vehicle.setId(id);
             }
         } catch (SQLException e){
             e.printStackTrace();

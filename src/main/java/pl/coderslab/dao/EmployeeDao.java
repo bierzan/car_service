@@ -35,6 +35,7 @@ public class EmployeeDao {
                 employee.setPhone(rs.getInt("phone"));
                 employee.setNote(rs.getString("note"));
                 employee.setWorkingHourCost(rs.getBigDecimal("working_hour_cost"));
+                employee.setId(id);
             }
         } catch (SQLException e){
             e.printStackTrace();
