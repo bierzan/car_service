@@ -3,8 +3,8 @@
 
 <table class="table">
     <tr>
-        <th><a href="/">STRONA GŁÓWNA</a></th>
-        <th><a href="">PRACOWNICY</a></th>
+        <th><a href="/Homepage">STRONA GŁÓWNA</a></th>
+        <th><a href="/EmployeesList">PRACOWNICY</a></th>
         <th><a href="">KLIENCI</a></th> <%--TODO PRZY KAZDYM KLIENCIE LINK DO JEGO POJAZDOW--%>
         <th><a href="">ZLECENIA</a></th>
         <th><a href="">RAPORTY</a></th>

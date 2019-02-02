@@ -15,28 +15,22 @@
     <table class="table table-sm table-condensed" style="font-size: 14px">
         <tr>
             <th>ID</th>
-            <th>DATA PRZYJĘCIA</th>
-            <th>DATA ROZPOCZĘCIA PRACY</th>
-            <th>ID PRACOWNIKA</th>
-            <th>OPIS PROBLEMU</th>
-            <th>OPIS NAPRAWY</th>
-            <th>ID POJAZDU</th>
-            <th>KOSZT NAPRAWY</th>
-            <th>KOSZT CZĘŚCI</th>
+            <th>IMIĘ</th>
+            <th>NAZWISKO</th>
+            <th>ADRES</th>
+            <th>NR TEL.</th>
+            <th>NOTATKA</th>
             <th>RG</th>
         </tr>
-        <c:forEach items="${orders}" var="ord">
+        <c:forEach items="${employees}" var="emp">
             <tr>
-                <td>${ord.id}</td>
-                <td>${ord.orderDate}</td>
-                <td>${ord.repairStart}</td>
-                <td>${ord.employee.id}</td>
-                <td>${ord.problemDescription}</td>
-                <td>${ord.repairDescription}</td>
-                <td>${ord.vehicle.id}</td>
-                <td>${ord.repairCost}</td>
-                <td>${ord.partsCost}</td>
-                <td>${ord.workingHours}</td>
+                <td>${emp.id}</td>
+                <td>${emp.name}</td>
+                <td>${emp.surname}</td>
+                <td>${emp.address}</td>
+                <td>${emp.phone}</td>
+                <td>${emp.note}</td>
+                <td>${emp.workingHourCost}</td>
             </tr>
         </c:forEach>
     </table>
