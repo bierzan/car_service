@@ -15,28 +15,28 @@
     <table class="table table-sm table-condensed table-hover" style="font-size: 90%">
         <tr>
             <th>ID</th>
-            <th>IMIĘ</th>
-            <th>NAZWISKO</th>
-            <th>ADRES</th>
-            <th>NR TEL.</th>
-            <th style="width:50%">NOTATKA</th>
+            <th>DATA PRZYJĘCIA</th>
+            <th>DATA ROZPOCZĘCIA PRACY</th>
+            <th>OPIS PROBLEMU</th>
+            <th>OPIS NAPRAWY</th>
+            <th>STATUS ZLECENIA</th>
+            <th>ID POJAZDU</th>
+            <th>KOSZT NAPRAWY</th>
+            <th>KOSZT CZĘŚCI</th>
             <th>RG</th>
-            <th></th>
-            <th></th>
         </tr>
-        <c:forEach items="${employees}" var="emp">
+        <c:forEach items="${orders}" var="ord">
             <tr>
-
-                <td>${emp.id}</td>
-                <td>${emp.name}</td>
-                <td>${emp.surname}</td>
-                <td>${emp.address}</td>
-                <td>${emp.phone}</td>
-                <td>${emp.note}</td>
-                <td>${emp.workingHourCost}</td>
-                <td><a href="/EmployeeOrders?empId=${emp.id}">Zlecenia</a></td>
-                <td><a href="/employeeToEdit?empId=${emp.id}">Edytuj</a></td>
-                <td><a href="/deleteEmployee">Usuń</a></td>
+                <td>${ord.id}</td>
+                <td>${ord.orderDate}</td>
+                <td>${ord.repairStart}</td>
+                <td>${ord.problemDescription}</td>
+                <td>${ord.repairDescription}</td>
+                <td>${ord.status.displayStatus}</td>
+                <td>${ord.vehicle.id}</td>
+                <td>${ord.repairCost}</td>
+                <td>${ord.partsCost}</td>
+                <td>${ord.workingHours}</td>
             </tr>
         </c:forEach>
     </table>
