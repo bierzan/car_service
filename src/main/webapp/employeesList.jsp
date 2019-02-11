@@ -42,7 +42,7 @@
                 <td>${emp.workingHourCost}</td>
                 <td><a href="/EmployeeOrders?empId=${emp.id}">Zlecenia</a></td>
                 <td><a href="/employeeToEdit?empId=${emp.id}">Edytuj</a></td>
-                <td><a href="/deleteEmployee">Usuń</a></td>
+                <td><a href="/deleteEmployee?empId=${emp.id}">Usuń</a></td>
             </tr>
         </c:forEach>
     </table>

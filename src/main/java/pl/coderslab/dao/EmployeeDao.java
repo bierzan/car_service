@@ -77,7 +77,7 @@ public class EmployeeDao {
     public void save(Employee employee) {
 
         if (employee.getId() == 0) {
-            try(Connection conn = DBUtil.getConn()){
+            try (Connection conn = DBUtil.getConn()) {
                 String sql = "INSERT INTO staff (first_name, surname, address, phone, note, working_hour_cost ) VALUES (?, ?,?,?,?,?)";
                 String[] generatedColumns = {"id"};
                 PreparedStatement prepStm = conn.prepareStatement(sql, generatedColumns);
@@ -93,7 +93,7 @@ public class EmployeeDao {
                 if (rs.next()) {
                     employee.setId(rs.getInt(1));
                 }
-            } catch (SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
 
@@ -124,5 +124,17 @@ public class EmployeeDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void delete(int id) {
+        try (Connection conn = DBUtil.getConn()) {
+            String sql = "DELETE FROM staff WHERE id = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
