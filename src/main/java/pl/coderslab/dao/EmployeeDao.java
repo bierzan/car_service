@@ -74,24 +74,29 @@ public class EmployeeDao {
         return employee;
     }
 
-    public void save(Employee employee) throws SQLException {
-        Connection conn = DBUtil.getConn();
-        if (employee.getId() == 0) {
-            String sql = "INSERT INTO staff (first_name, surname, address, phone, note, working_hour_cost ) VALUES (?, ?,?,?,?,?)";
-            String[] generatedColumns = {"id"};
-            PreparedStatement prepStm = conn.prepareStatement(sql, generatedColumns);
-            prepStm.setString(1, employee.getName());
-            prepStm.setString(2, employee.getSurname());
-            prepStm.setString(3, employee.getAddress());
-            prepStm.setInt(4, employee.getPhone());
-            prepStm.setString(5, employee.getNote());
-            prepStm.setBigDecimal(6, employee.getWorkingHourCost());
-            prepStm.executeUpdate();
-            ResultSet rs = prepStm.getGeneratedKeys();
+    public void save(Employee employee) {
 
-            if (rs.next()) {
-                employee.setId(rs.getInt(1));
+        if (employee.getId() == 0) {
+            try(Connection conn = DBUtil.getConn()){
+                String sql = "INSERT INTO staff (first_name, surname, address, phone, note, working_hour_cost ) VALUES (?, ?,?,?,?,?)";
+                String[] generatedColumns = {"id"};
+                PreparedStatement prepStm = conn.prepareStatement(sql, generatedColumns);
+                prepStm.setString(1, employee.getName());
+                prepStm.setString(2, employee.getSurname());
+                prepStm.setString(3, employee.getAddress());
+                prepStm.setInt(4, employee.getPhone());
+                prepStm.setString(5, employee.getNote());
+                prepStm.setBigDecimal(6, employee.getWorkingHourCost());
+                prepStm.executeUpdate();
+                ResultSet rs = prepStm.getGeneratedKeys();
+
+                if (rs.next()) {
+                    employee.setId(rs.getInt(1));
+                }
+            } catch (SQLException e){
+                e.printStackTrace();
             }
+
         } else {
             update(employee);
         }

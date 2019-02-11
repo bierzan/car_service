@@ -11,6 +11,12 @@
 <div class="container">
     <%@include file="header.jspf" %>
 </div>
+
+<div class="container">
+    <form action="/forms/addEmployee.jsp">
+        <button type="submit" class="btn btn-primary btn-block">Dodaj pracownika</button>
+    </form>
+</div>
 <div class="container-fluid">
     <table class="table table-sm table-condensed table-hover" style="font-size: 90%">
         <tr>
