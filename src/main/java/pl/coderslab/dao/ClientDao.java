@@ -1,10 +1,11 @@
 package pl.coderslab.dao;
 
 import pl.coderslab.model.Client;
-import pl.coderslab.model.Vehicle;
 import pl.coderslab.utils.DBUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClientDao {
     private static ClientDao instance;
@@ -49,25 +50,50 @@ public class ClientDao {
 
     }
 
-    public Client loadById(int id){
+    public Client loadById(int id) {
         Client client = new Client();
 
-        try(Connection conn = DBUtil.getConn()){
+        try (Connection conn = DBUtil.getConn()) {
             String sql = "SELECT * FROM clients WHERE id = ?";
             PreparedStatement prepStm = conn.prepareStatement(sql);
-            prepStm.setInt(1,id);
+            prepStm.setInt(1, id);
             prepStm.executeQuery();
             ResultSet rs = prepStm.getResultSet();
 
-            while(rs.next()){
+            while (rs.next()) {
                 client.setName(rs.getString("first_name"));
                 client.setSurname(rs.getString("surname"));
                 client.setBirthday(rs.getDate("birthday").toLocalDate());
                 client.setId(id);
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return client;
+    }
+
+    public List<Client> loadAll() {
+        List<Client> clients = new ArrayList<>();
+
+
+        try (Connection conn = DBUtil.getConn()) {
+            String sql = "SELECT * FROM clients";
+            PreparedStatement prepStm = conn.prepareStatement(sql);
+            prepStm.executeQuery();
+            ResultSet rs = prepStm.getResultSet();
+
+            while (rs.next()) {
+                Client client = new Client();
+                client.setName(rs.getString("first_name"));
+                client.setSurname(rs.getString("surname"));
+                client.setBirthday(rs.getDate("birthday").toLocalDate());
+                client.setId(rs.getInt("id"));
+
+                clients.add(client);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clients;
     }
 }

@@ -1,7 +1,6 @@
 package pl.coderslab.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Client {
     private int id;
