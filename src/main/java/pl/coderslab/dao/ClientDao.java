@@ -1,7 +1,6 @@
 package pl.coderslab.dao;
 
 import pl.coderslab.model.Client;
-import pl.coderslab.model.Employee;
 import pl.coderslab.utils.DBUtil;
 
 import java.sql.*;
@@ -70,6 +69,18 @@ public class ClientDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void deleteById(int id) {
+        try (Connection conn = DBUtil.getConn()) {
+            String sql = "DELETE FROM clients WHERE id = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public Client loadById(int id) {

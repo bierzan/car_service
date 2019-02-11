@@ -126,7 +126,7 @@ public class EmployeeDao {
         }
     }
 
-    public void delete(int id) {
+    public void deleteById(int id) {
         try (Connection conn = DBUtil.getConn()) {
             String sql = "DELETE FROM staff WHERE id = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);

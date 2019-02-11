@@ -1,6 +1,6 @@
 package pl.coderslab.controller;
 
-import pl.coderslab.dao.EmployeeDao;
+import pl.coderslab.dao.ClientDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,17 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/deleteEmployee")
-public class deleteEmployee extends HttpServlet {
+@WebServlet("/DeleteClient")
+public class DeleteClient extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int empId = Integer.valueOf(request.getParameter("empId"));
-        EmployeeDao.getInstance().deleteById(empId);
-        response.sendRedirect("/EmployeesList");
-
-
+        int id = Integer.valueOf(request.getParameter("cliId"));
+        ClientDao.getInstance().deleteById(id);
+        response.sendRedirect("/ClientsList");
     }
 }

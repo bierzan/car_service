@@ -107,4 +107,50 @@ public class OrderDao {
         return orders;
 
     }
+
+    public List<Order> loadByVehicleId(int id){
+
+        List<Order> orders = new ArrayList<>();
+
+        try (Connection conn = DBUtil.getConn()) {
+            String sql = "SELECT * FROM orders WHERE car_id = ?";
+            PreparedStatement prepStm = conn.prepareStatement(sql);
+            prepStm.setInt(1, id);
+            prepStm.executeQuery();
+            ResultSet rs = prepStm.getResultSet();
+            Status[] statuses = Status.values();
+            while (rs.next()) {
+                Order order = new Order();
+                order.setId(rs.getInt("id"));
+                Timestamp timestamp = rs.getTimestamp("order_date");
+                LocalDateTime ldt = timestamp.toLocalDateTime();
+                order.setOrderDate(ldt);
+                order.setPlannedRepairStart(rs.getDate("planned_repair_start").toLocalDate());
+                order.setRepairStart(rs.getTimestamp("repair_start").toLocalDateTime());
+                order.setEmployee(EmployeeDao.getInstance().loadById(rs.getInt("worker_id")));
+                order.setProblemDescription(rs.getString("problem_desc"));
+                order.setRepairDescription(rs.getString("repair_desc"));
+                String statusFromDB = rs.getString("order_status");
+                for (Status status: statuses) {
+                    if (status.getDisplayStatus().equals(statusFromDB)){
+                        order.setStatus(status);
+                    }
+                }
+                order.setVehicle(VehicleDao.getInstance().loadById(id));
+                order.setRepairCost(rs.getBigDecimal("repair_cost"));
+                order.setPartsCost(rs.getBigDecimal("parts_cost"));
+                order.setWorkingHours(rs.getInt("working_hours"));
+                if (rs.getDate("repair_end") != null) {
+                    order.setRepairEnd(rs.getDate("repair_end").toLocalDate());
+                }
+                orders.add(order);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return orders;
+
+    }
 }

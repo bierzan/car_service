@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VehicleDao {
     private static VehicleDao instance;
@@ -43,5 +45,33 @@ public class VehicleDao {
             e.printStackTrace();
         }
         return vehicle;
+    }
+
+    public List<Vehicle> loadByClientId(int id){
+
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        try(Connection conn = DBUtil.getConn()){
+            String sql = "SELECT * FROM vehicles WHERE client_id = ?";
+            PreparedStatement prepStm = conn.prepareStatement(sql);
+            prepStm.setInt(1,id);
+            prepStm.executeQuery();
+            ResultSet rs = prepStm.getResultSet();
+
+            while(rs.next()){
+                Vehicle vehicle = new Vehicle();
+                vehicle.setClient(ClientDao.getInstance().loadById(id));
+                vehicle.setBrand(rs.getString("brand"));
+                vehicle.setModel(rs.getString("model"));
+                vehicle.setProductionYear(rs.getInt("production_year"));
+                vehicle.setRegNumber(rs.getString("reg_number"));
+                vehicle.setNextService(rs.getDate("next_service").toLocalDate());
+                vehicle.setId(rs.getInt("id"));
+                vehicles.add(vehicle);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return vehicles;
     }
 }

@@ -11,34 +11,25 @@
 <div class="container">
     <%@include file="header.jspf" %>
 </div>
-
-<div class="container">
-    <form action="/forms/addClient.jsp">
-        <button type="submit" class="btn btn-primary btn-block">Dodaj klienta</button>
-    </form>
-</div>
 <div class="container">
     <table class="table table-sm table-condensed table-hover" style="font-size: 90%">
         <tr>
             <th>ID</th>
-            <th>IMIĘ</th>
-            <th>NAZWISKO</th>
-            <th>URODZINY</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th>MARKA</th>
+            <th>MODEL</th>
+            <th>ROK PRODUKCJI</th>
+            <th>NR REJ.</th>
+            <th>NASTĘPNY SERWIS</th>
         </tr>
-        <c:forEach items="${clients}" var="cli">
+        <c:forEach items="${vehicles}" var="veh">
             <tr>
-                <td>${cli.id}</td>
-                <td>${cli.name}</td>
-                <td>${cli.surname}</td>
-                <td>${cli.birthday}</td>
-                <td><a href="/OrdersByClient?cliId=${cli.id}">Zlecenia</a></td>
-                <td><a href="/VehiclesByClient?cliId=${cli.id}">Pojazdy</a></td>
-                <td><a href="/ClientToEdit?cliId=${cli.id}">Edytuj</a></td>
-                <td><a href="/DeleteClient?cliId=${cli.id}">Usuń</a></td>
+
+                <td>${veh.id}</td>
+                <td>${veh.brand}</td>
+                <td>${veh.model}</td>
+                <td>${veh.productionYear}</td>
+                <td>${veh.regNumber}</td>
+                <td>${veh.nextService}</td>
             </tr>
         </c:forEach>
     </table>
