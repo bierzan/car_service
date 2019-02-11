@@ -1,6 +1,7 @@
 package pl.coderslab.dao;
 
 import pl.coderslab.model.Client;
+import pl.coderslab.model.Employee;
 import pl.coderslab.utils.DBUtil;
 
 import java.sql.*;
@@ -48,6 +49,27 @@ public class ClientDao {
             e.printStackTrace();
         }
 
+    }
+
+    public void update(Client client) {
+
+        try (Connection conn = DBUtil.getConn()) {
+            if (client.getId() > 0) {
+                String sql = "UPDATE clients SET first_name = ?, surname = ?, birthday = ? WHERE id = ?";
+                PreparedStatement prepStm = conn.prepareStatement(sql);
+                prepStm.setString(1, client.getName());
+                prepStm.setString(2, client.getSurname());
+                prepStm.setDate(3, Date.valueOf(client.getBirthday()));
+
+                prepStm.setInt(4, client.getId());
+                prepStm.executeUpdate();
+            } else {
+                System.out.println("Taki pracownik nie istnieje w bazie danych");
+                //todo przerobic na komunikat na stronie
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public Client loadById(int id) {

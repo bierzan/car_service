@@ -33,9 +33,9 @@
                 <td>${cli.name}</td>
                 <td>${cli.surname}</td>
                 <td>${cli.birthday}</td>
-                <td><a href="/EmployeeOrders?empId=${emp.id}">Zlecenia</a></td>
-                <td><a href="/employeeToEdit?empId=${emp.id}">Edytuj</a></td>
-                <td><a href="/deleteEmployee?empId=${emp.id}">Usuń</a></td>
+                <td><a href="/EmployeeOrders?empId=${cli.id}">Zlecenia</a></td>
+                <td><a href="/ClientToEdit?cliId=${cli.id}">Edytuj</a></td>
+                <td><a href="/deleteEmployee?empId=${cli.id}">Usuń</a></td>
             </tr>
         </c:forEach>
     </table>
