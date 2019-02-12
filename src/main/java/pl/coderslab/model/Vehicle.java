@@ -11,7 +11,7 @@ public class Vehicle {
     private String regNumber;
     private LocalDate nextService;
 
-    public Vehicle(){
+    public Vehicle() {
 
     }
 

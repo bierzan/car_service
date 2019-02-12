@@ -1,6 +1,5 @@
 package pl.coderslab.dao;
 
-import pl.coderslab.model.Client;
 import pl.coderslab.model.Vehicle;
 import pl.coderslab.utils.DBUtil;
 
@@ -31,8 +30,8 @@ public class VehicleDao {
 
             while (rs.next()) {
                 vehicle.setClient(ClientDao.getInstance().loadById(rs.getInt("client_id")));
-                vehicle.setBrand("brand");
-                vehicle.setModel("model");
+                vehicle.setBrand(rs.getString("brand"));
+                vehicle.setModel(rs.getString("model"));
                 vehicle.setProductionYear(rs.getInt("production_year"));
                 vehicle.setRegNumber(rs.getString("reg_number"));
                 vehicle.setNextService(rs.getDate("next_service").toLocalDate());
@@ -96,6 +95,28 @@ public class VehicleDao {
             if (rs.next()) {
                 vehicle.setId(rs.getInt(1));
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void update(Vehicle vehicle) {
+
+        try (Connection conn = DBUtil.getConn()) {
+
+            PreparedStatement prepStm;
+            String sql = "UPDATE vehicles SET brand=?, model=?, production_year=?, reg_number=?, next_service=? WHERE id=?";
+            prepStm = conn.prepareStatement(sql);
+
+            prepStm.setString(1, vehicle.getBrand());
+            prepStm.setString(2, vehicle.getModel());
+            prepStm.setString(3, String.valueOf(vehicle.getProductionYear()));
+            prepStm.setString(4, vehicle.getRegNumber());
+            prepStm.setDate(5, Date.valueOf(vehicle.getNextService()));
+            prepStm.setInt(6, vehicle.getId());
+            prepStm.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();

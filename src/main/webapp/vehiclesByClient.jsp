@@ -25,6 +25,8 @@
             <th>ROK PRODUKCJI</th>
             <th>NR REJ.</th>
             <th>NASTĘPNY SERWIS</th>
+            <th></th>
+            <th></th>
         </tr>
         <c:forEach items="${vehicles}" var="veh">
             <tr>
@@ -35,6 +37,8 @@
                 <td>${veh.productionYear}</td>
                 <td>${veh.regNumber}</td>
                 <td>${veh.nextService}</td>
+                <td><a href="/VehicleToEdit?vehId=${veh.id}">Edytuj</a></td>
+                <td><a href="/DeleteClient?cliId=${cli.id}">Usuń</a></td>
             </tr>
         </c:forEach>
     </table>

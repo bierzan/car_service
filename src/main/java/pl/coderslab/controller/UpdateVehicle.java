@@ -1,6 +1,5 @@
 package pl.coderslab.controller;
 
-import pl.coderslab.dao.ClientDao;
 import pl.coderslab.dao.VehicleDao;
 import pl.coderslab.model.Vehicle;
 
@@ -12,22 +11,26 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 
-@WebServlet("/addVehicle")
-public class addVehicle extends HttpServlet {
+@WebServlet("/UpdateVehicle")
+public class UpdateVehicle extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int clientId = Integer.valueOf(request.getParameter("sendId"));
+        int id = Integer.valueOf(request.getParameter("sendId"));
         String brand = request.getParameter("brand");
         String model = request.getParameter("model");
         int productionYear = Integer.valueOf(request.getParameter("prodYear"));
         String regNumber = request.getParameter("reg");
         LocalDate nextService = LocalDate.parse(request.getParameter("nextService"));
 
-        Vehicle vehicle = new Vehicle(ClientDao.getInstance().loadById(clientId),
-                brand, model, productionYear, regNumber, nextService);
+        Vehicle vehicle = VehicleDao.getInstance().loadById(id);
+        vehicle.setBrand(brand);
+        vehicle.setModel(model);
+        vehicle.setProductionYear(productionYear);
+        vehicle.setRegNumber(regNumber);
+        vehicle.setNextService(nextService);
 
-        VehicleDao.getInstance().save(vehicle);
+        VehicleDao.getInstance().update(vehicle);
 
-        response.sendRedirect("/VehiclesByClient?cliId=" + clientId);
+        response.sendRedirect("/VehiclesByClient?cliId=" + vehicle.getClient().getId());
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
