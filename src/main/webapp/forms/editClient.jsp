@@ -22,7 +22,7 @@
             <label for="nameId">Imię: </label>
             <input type="text" class="form-control" name="name" id="nameId" value="${client.name}">
 
-            <label for="surnameId" >Nazwisko: </label>
+            <label for="surnameId">Nazwisko: </label>
             <input type="text" class="form-control" name="surname" id="surnameId" value="${client.surname}">
 
             <label for="birthdayId">Data urodzenia: </label>

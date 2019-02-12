@@ -22,20 +22,22 @@
             <label for="nameId">Imię: </label>
             <input type="text" class="form-control" name="name" id="nameId" value="${employee.name}">
 
-            <label for="surnameId" >Nazwisko: </label>
+            <label for="surnameId">Nazwisko: </label>
             <input type="text" class="form-control" name="surname" id="surnameId" value="${employee.surname}">
 
             <label for="addressId">Adres: </label>
             <textarea id="addressId" class="form-control" name="address">${employee.address}</textarea>
 
             <label for="phoneId">Telefon:</label>
-            <input type="number" name="phone" id="phoneId" max="9999999999" value="${employee.phone}" class="form-control">
+            <input type="number" name="phone" id="phoneId" max="9999999999" value="${employee.phone}"
+                   class="form-control">
 
             <label for="noteId">Notatka: </label>
             <textarea id="noteId" class="form-control" name="note">${employee.note}</textarea>
 
             <label for="whcId">Koszt roboczogodziny:</label>
-            <input type="number" step="0.01" name="whc" id="whcId" value="${employee.workingHourCost}" class="form-control">
+            <input type="number" step="0.01" name="whc" id="whcId" value="${employee.workingHourCost}"
+                   class="form-control">
         </div>
         <button class="btn" type="submit" name="sendId" value="${employee.id}">Zaktualizuj</button>
     </form>

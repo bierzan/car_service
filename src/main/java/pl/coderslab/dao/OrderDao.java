@@ -63,7 +63,7 @@ public class OrderDao {
         return orders;
     }
 
-    public List<Order> loadByEmployeeId(int empId){
+    public List<Order> loadByEmployeeId(int empId) {
 
         List<Order> orders = new ArrayList<>();
         try (Connection conn = DBUtil.getConn()) {
@@ -85,8 +85,8 @@ public class OrderDao {
                 order.setProblemDescription(rs.getString("problem_desc"));
                 order.setRepairDescription(rs.getString("repair_desc"));
                 String statusFromDB = rs.getString("order_status");
-                for (Status status: statuses) {
-                    if (status.getDisplayStatus().equals(statusFromDB)){
+                for (Status status : statuses) {
+                    if (status.getDisplayStatus().equals(statusFromDB)) {
                         order.setStatus(status);
                     }
                 }
@@ -108,7 +108,7 @@ public class OrderDao {
 
     }
 
-    public List<Order> loadByVehicleId(int id){
+    public List<Order> loadByVehicleId(int id) {
 
         List<Order> orders = new ArrayList<>();
 
@@ -131,8 +131,8 @@ public class OrderDao {
                 order.setProblemDescription(rs.getString("problem_desc"));
                 order.setRepairDescription(rs.getString("repair_desc"));
                 String statusFromDB = rs.getString("order_status");
-                for (Status status: statuses) {
-                    if (status.getDisplayStatus().equals(statusFromDB)){
+                for (Status status : statuses) {
+                    if (status.getDisplayStatus().equals(statusFromDB)) {
                         order.setStatus(status);
                     }
                 }

@@ -17,6 +17,7 @@ public class VehiclesByClient extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.valueOf(request.getParameter("cliId"));
+        request.setAttribute("client", id);
         request.setAttribute("vehicles", VehicleDao.getInstance().loadByClientId(id));
         getServletContext().getRequestDispatcher("/vehiclesByClient.jsp").forward(request, response);
     }

@@ -11,6 +11,19 @@ public class Vehicle {
     private String regNumber;
     private LocalDate nextService;
 
+    public Vehicle(){
+
+    }
+
+    public Vehicle(Client client, String brand, String model, int productionYear, String regNumber, LocalDate nextService) {
+        this.client = client;
+        this.brand = brand;
+        this.model = model;
+        this.productionYear = productionYear;
+        this.regNumber = regNumber;
+        this.nextService = nextService;
+    }
+
     public int getId() {
         return id;
     }

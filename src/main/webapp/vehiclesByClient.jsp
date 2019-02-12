@@ -12,6 +12,11 @@
     <%@include file="header.jspf" %>
 </div>
 <div class="container">
+    <form action="/forms/addVehicle.jsp" method="post">
+        <button type="submit" name="add" class="btn btn-primary btn-block" value="${client}">Dodaj pojazd</button>
+    </form>
+</div>
+<div class="container">
     <table class="table table-sm table-condensed table-hover" style="font-size: 90%">
         <tr>
             <th>ID</th>

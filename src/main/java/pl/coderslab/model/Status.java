@@ -9,16 +9,16 @@ public enum Status {
 
     private String displayStatus;
 
-    Status(String displayStatus){
+    Status(String displayStatus) {
         this.displayStatus = displayStatus;
     }
 
-    public String getDisplayStatus(){
+    public String getDisplayStatus() {
         return displayStatus;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return displayStatus;
     }
 

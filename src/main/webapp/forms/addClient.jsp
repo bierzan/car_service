@@ -21,8 +21,8 @@
             <label for="nameId">Imię: </label>
             <input type="text" class="form-control" name="name" id="nameId">
 
-            <label for="surnameId" >Nazwisko: </label>
-            <input type="text" class="form-control" name="surname" id="surnameId" >
+            <label for="surnameId">Nazwisko: </label>
+            <input type="text" class="form-control" name="surname" id="surnameId">
 
             <label for="birthdayId">Data urodzenia: </label>
             <input type="date" id="birthdayId" class="form-control" name="birthday">
